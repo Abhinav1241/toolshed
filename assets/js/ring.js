@@ -23,12 +23,73 @@
     return !reduce.matches;
   }
 
+  var stage = section.querySelector('.ring-stage');
+  var phone = matchMedia('(max-width: 719px)');
+  var capEl = section.querySelector('[data-ring-caption]');
+  var openBtn = section.querySelector('[data-ring-open]');
+
+  // Beat 4: the camera sits in the middle of the cylinder, so the perspective
+  // distance equals the radius (front panel at scale 1; a little wider on phones).
   function layout() {
     if (!ringOn()) return;
     var w = ring.offsetWidth;
     var radius = (w + GAP) / 2 / Math.tan(Math.PI / n);
+    var persp = radius * (phone.matches ? 0.7 : 1);
     ring.style.setProperty('--radius', radius.toFixed(1) + 'px');
+    stage.style.setProperty('--persp', persp.toFixed(1) + 'px');
     pinLength = Math.max(section.offsetHeight - window.innerHeight, 1);
+  }
+
+  // Wall segments: the gridded inside of the cylinder, one flat slice behind each panel
+  items.forEach(function (li, i) {
+    var seg = document.createElement('div');
+    seg.className = 'wall-seg';
+    seg.setAttribute('aria-hidden', 'true');
+    seg.style.setProperty('--i', i);
+    ring.appendChild(seg);
+  });
+
+  // Caption (bottom left) follows the front panel
+  var cache = {};
+  function captionFor(id) {
+    if (cache[id]) return cache[id];
+    var data = window.TOOLSHED;
+    var tools = data ? data.tools.filter(function (t) { return t.category === id; }) : [];
+    var counts = {};
+    tools.forEach(function (t) { t.tags.forEach(function (g) { counts[g] = (counts[g] || 0) + 1; }); });
+    var tags = Object.keys(counts).sort(function (a, b) { return counts[b] - counts[a] || (a < b ? -1 : 1); }).slice(0, 3);
+    return (cache[id] = { count: tools.length, tags: tags });
+  }
+
+  var capTimer = null;
+  function updateCaption(i) {
+    if (!capEl) return;
+    var btn = buttons[i];
+    var name = btn.querySelector('.panel-name').textContent;
+    var info = captionFor(btn.dataset.category);
+    var count = info.count || Number(btn.dataset.count) || 0;
+    clearTimeout(capTimer);
+    capEl.classList.add('is-swapping');
+    capTimer = setTimeout(function () {
+      capEl.querySelector('[data-cap-num]').textContent = '#' + String(i + 1).padStart(2, '0') + ' · ' + name.toUpperCase();
+      capEl.querySelector('[data-cap-name]').textContent = name;
+      capEl.querySelector('[data-cap-count]').textContent = count + (count === 1 ? ' tool' : ' tools');
+      var ul = capEl.querySelector('[data-cap-tags]');
+      ul.textContent = '';
+      info.tags.forEach(function (g) {
+        var li = document.createElement('li');
+        li.textContent = g;
+        ul.appendChild(li);
+      });
+      if (openBtn) openBtn.setAttribute('aria-label', 'Open ' + name + ', ' + count + ' tools');
+      capEl.classList.remove('is-swapping');
+    }, 90);
+  }
+
+  if (openBtn) {
+    openBtn.addEventListener('click', function () {
+      if (front >= 0) openCategory(front);
+    });
   }
 
   function sectionTop() {
@@ -50,7 +111,7 @@
     for (var i = 0; i < n; i++) {
       var d = i - pos;
       d -= Math.round(d / n) * n;
-      items[i].style.opacity = Math.max(0.2, 1 - Math.abs(d) * 0.3).toFixed(2);
+      items[i].style.opacity = Math.max(0.3, 1 - Math.max(Math.abs(d) - 1, 0) * 0.25).toFixed(2);
     }
 
     var f = Math.round(pos) % n;
@@ -59,6 +120,7 @@
       items[f].classList.add('is-front');
       front = f;
       indexEl.textContent = String(f + 1).padStart(2, '0');
+      updateCaption(f);
     }
   }
 
@@ -104,6 +166,8 @@
     layout();
     requestUpdate();
   });
+
+  phone.addEventListener('change', function () { layout(); requestUpdate(); });
 
   reduce.addEventListener('change', function () {
     ring.style.removeProperty('--angle');

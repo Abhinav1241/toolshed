@@ -124,7 +124,14 @@ html {
   line-height: 1.4;
 }
 
-/* 3D ring (motion allowed + JS) */
+/* The ring seen from inside (motion allowed + JS). DESIGN_BRIEF section 8, beat 4:
+   the camera sits at the centre of a gridded cylinder; panels hang on its inner wall. */
+.wall-seg,
+.ring-caption,
+.ring-open {
+  display: none;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   html.js .ring-section {
     padding: 0;
@@ -132,19 +139,20 @@ html {
   }
 
   html.js .ring-stage {
+    --persp: 760px;
     position: sticky;
     top: 0;
     height: 100vh;
     height: 100svh;
     overflow: hidden;
-    perspective: 1200px;
+    perspective: var(--persp);
     display: grid;
     place-items: center;
   }
 
   html.js .ring-head {
     position: absolute;
-    top: 5rem;
+    top: 5.25rem;
     left: clamp(1rem, 4vw, 2.5rem);
     right: clamp(1rem, 4vw, 2.5rem);
     margin: 0;
@@ -159,48 +167,181 @@ html {
   }
 
   html.js .ring-index {
-    display: block;
-    position: absolute;
-    bottom: 2rem;
-    left: 0;
-    right: 0;
-    text-align: center;
+    display: none;
   }
 
   html.js .ring {
-    --pw: clamp(220px, 78vw, 300px);
+    --pw: clamp(210px, min(78vw, 42svh), 300px);
     --radius: 700px;
+    --cell: calc((var(--pw) + 24px) / 4);
     display: block;
     position: relative;
     width: var(--pw);
     height: calc(var(--pw) * 1.3);
+    margin-top: -4svh;
     transform-style: preserve-3d;
-    transform: translateZ(calc(var(--radius) * -1)) rotateY(calc(var(--angle, 0) * 1deg));
+    /* Origin of the ring = the camera; rotate about the vertical axis through it */
+    transform: translateZ(var(--persp)) rotateY(calc(var(--angle, 0) * 1deg));
     will-change: transform;
   }
 
+  /* Panels face the centre: rotate to its slot, then push out to the wall */
   html.js .panel-item {
     position: absolute;
     inset: 0;
-    transform: rotateY(calc(var(--i) * 24deg)) translateZ(var(--radius));
+    transform: rotateY(calc(var(--i) * 24deg)) translateZ(calc(var(--radius) * -1));
     backface-visibility: hidden;
+  }
+
+  /* Grid on the inside of the cylinder: one slice behind each panel, lines continuous around */
+  html.js .wall-seg {
+    position: absolute;
+    display: block;
+    left: -12px;
+    width: calc(var(--pw) + 24px);
+    top: 50%;
+    height: 220svh;
+    margin-top: -110svh;
+    transform: rotateY(calc(var(--i) * 24deg)) translateZ(calc(var(--radius) * -1 - 4px));
+    background:
+      linear-gradient(90deg, var(--line) 2px, transparent 2px) 0 0 / var(--cell) var(--cell),
+      linear-gradient(var(--line) 2px, transparent 2px) 0 50% / var(--cell) var(--cell);
+    border-right: 2px solid var(--line);
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 22%, #000 78%, transparent 100%);
+    mask-image: linear-gradient(to bottom, transparent 0%, #000 22%, #000 78%, transparent 100%);
+    backface-visibility: hidden;
+    pointer-events: none;
   }
 
   html.js .panel {
     min-height: 0;
+    box-shadow: 0 0 0 6px var(--bg);
   }
 
+  /* The caption says it; the panel keeps the text for screen readers only */
   html.js .panel-extra {
-    opacity: 0;
-    transition: opacity 0.25s;
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
   }
 
   html.js .panel-item.is-front .panel {
     border-color: var(--accent);
   }
 
-  html.js .panel-item.is-front .panel-extra {
-    opacity: 1;
+  /* Caption bottom-left, Open bottom-right */
+  html.js .ring-caption {
+    position: absolute;
+    z-index: 3;
+    left: clamp(1rem, 4vw, 2.5rem);
+    bottom: 2rem;
+    display: grid;
+    gap: 0.35rem;
+    max-width: min(26rem, 60vw);
+    transition: opacity 0.12s linear, transform 0.12s linear;
+  }
+
+  html.js .ring-caption.is-swapping {
+    opacity: 0;
+    transform: translateY(0.4rem);
+  }
+
+  .cap-num {
+    margin: 0;
+    color: var(--accent);
+  }
+
+  .cap-name {
+    margin: 0;
+    font-size: clamp(2rem, 5vw, 3.75rem);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.03em;
+  }
+
+  .cap-count {
+    margin: 0;
+  }
+
+  .cap-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin: 0.25rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .cap-tags li {
+    padding: 0.2rem 0.65rem;
+    border: 2px solid var(--line);
+    border-radius: 999px;
+    background: var(--bg);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+  }
+
+  html.js .ring-open {
+    position: absolute;
+    z-index: 3;
+    right: clamp(1rem, 4vw, 2.5rem);
+    bottom: 2rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    min-height: 44px;
+    padding: 0.6rem 1.1rem;
+    background: var(--accent);
+    color: var(--accent-ink);
+    border: 2px solid var(--accent);
+    border-radius: 14px;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+  }
+
+  html.js .ring-open:hover {
+    background: var(--bg);
+    color: var(--accent);
+  }
+
+  html.js .ring-open svg {
+    width: 18px;
+    height: 18px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.75;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) and (max-width: 719px) {
+  html.js .ring-head {
+    top: 7rem;
+  }
+
+  html.js .ring-hint {
+    display: none;
+  }
+
+  html.js .ring-caption {
+    bottom: 5.25rem;
+    max-width: 90vw;
+  }
+
+  html.js .ring-open {
+    left: clamp(1rem, 4vw, 2.5rem);
+    right: clamp(1rem, 4vw, 2.5rem);
+    justify-content: center;
   }
 }
 
