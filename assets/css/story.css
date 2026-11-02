@@ -79,21 +79,27 @@
 }
 
 /* ---------- Beat 6: manifesto (inverts against the theme) ---------- */
-.manifesto {
+.manifesto,
+.wipe {
   --m-bg: #f3ede0;
   --m-fg: #141517;
-  position: relative;
   background: var(--m-bg);
   color: var(--m-fg);
 }
 
-:root[data-theme='light'] .manifesto {
+.manifesto {
+  position: relative;
+}
+
+:root[data-theme='light'] .manifesto,
+:root[data-theme='light'] .wipe {
   --m-bg: #141517;
   --m-fg: #ece8e1;
 }
 
 @media (prefers-color-scheme: light) {
-  :root:not([data-theme='dark']) .manifesto {
+  :root:not([data-theme='dark']) .manifesto,
+  :root:not([data-theme='dark']) .wipe {
     --m-bg: #141517;
     --m-fg: #ece8e1;
   }
@@ -206,5 +212,54 @@
 
   html.js .manifesto .story-stage {
     padding-top: 7rem;
+  }
+}
+
+/* ---------- Beat 7: diagonal accent wipe (replaces the liquid shader) ---------- */
+.wipe {
+  display: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html.js .wipe {
+    --sp: 0;
+    display: block;
+    height: 180vh;
+    height: 180svh;
+  }
+
+  html.js .wipe .story-stage {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    height: 100svh;
+    overflow: hidden;
+    display: block;
+  }
+
+  .wipe-accent,
+  .wipe-page {
+    position: absolute;
+    inset: 0;
+  }
+
+  /* Two slanted edges sweep left to right: accent first, then the page colour */
+  .wipe-accent {
+    background: var(--accent);
+    clip-path: polygon(0 0, calc(var(--sp) * 200%) 0, calc(var(--sp) * 200% - 25%) 100%, 0 100%);
+  }
+
+  .wipe-page {
+    background: radial-gradient(var(--line) 1.5px, transparent 1.6px) 0 0 / 24px 24px, var(--bg);
+    clip-path: polygon(0 0, calc(var(--sp) * 200% - 40%) 0, calc(var(--sp) * 200% - 65%) 100%, 0 100%);
+  }
+
+  .wipe-label {
+    position: absolute;
+    right: clamp(1rem, 4vw, 2.5rem);
+    bottom: 2rem;
+    margin: 0;
+    color: var(--m-fg);
+    opacity: calc(1 - var(--sp) * 2.2);
   }
 }
