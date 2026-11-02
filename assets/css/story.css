@@ -77,3 +77,134 @@
     opacity: calc(1 - var(--sp) * 3);
   }
 }
+
+/* ---------- Beat 6: manifesto (inverts against the theme) ---------- */
+.manifesto {
+  --m-bg: #f3ede0;
+  --m-fg: #141517;
+  position: relative;
+  background: var(--m-bg);
+  color: var(--m-fg);
+}
+
+:root[data-theme='light'] .manifesto {
+  --m-bg: #141517;
+  --m-fg: #ece8e1;
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme='dark']) .manifesto {
+    --m-bg: #141517;
+    --m-fg: #ece8e1;
+  }
+}
+
+.manifesto .story-stage {
+  position: relative;
+  display: grid;
+  align-content: center;
+  min-height: 70vh;
+  padding: 6rem clamp(1rem, 4vw, 3.5rem);
+  overflow: hidden;
+}
+
+.manifesto-label {
+  position: absolute;
+  top: 5.5rem;
+  left: clamp(1rem, 4vw, 3.5rem);
+  color: var(--m-fg);
+  opacity: 0.6;
+}
+
+.manifesto-mark {
+  position: absolute;
+  right: -6vmin;
+  top: 50%;
+  width: min(80vmin, 46rem);
+  transform: translateY(-50%);
+  fill: none;
+  stroke: var(--m-fg);
+  stroke-width: 0.35;
+  stroke-linecap: round;
+  opacity: 0.16;
+  pointer-events: none;
+}
+
+.m-lines {
+  position: relative;
+  display: grid;
+  gap: 0.5em;
+  justify-items: start;
+  font-size: clamp(1.6rem, 5.4vw, 4.75rem);
+}
+
+.m-line {
+  position: relative;
+  isolation: isolate;
+  margin: 0;
+  padding: 0.12em 0.35em 0.16em;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--m-bg);
+}
+
+/* The highlight box; its text sits on top in the page colour */
+.m-line::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--m-fg);
+  transform-origin: left center;
+  scale: clamp(0, calc((var(--sp) - var(--k) * 0.24 - 0.06) * 8), 1) 1;
+}
+
+.m-line span {
+  opacity: clamp(0, calc((var(--sp) - var(--k) * 0.24 - 0.15) * 10), 1);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html.js .manifesto {
+    --sp: 0;
+    height: 360vh;
+    height: 360svh;
+  }
+
+  html.js .manifesto .story-stage {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    height: 100svh;
+    padding-top: 5rem;
+  }
+}
+
+/* Index and nav stay readable on the inverted page */
+.hud-index[data-invert] a {
+  color: #5e584e;
+}
+
+:root[data-theme='light'] .hud-index[data-invert] a {
+  color: #9c978e;
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme='dark']) .hud-index[data-invert] a {
+    color: #9c978e;
+  }
+}
+
+.hud-index[data-invert] a[aria-current='true'] {
+  color: var(--accent);
+}
+
+@media (max-width: 719px) {
+  .manifesto-label {
+    top: 7rem;
+  }
+
+  html.js .manifesto .story-stage {
+    padding-top: 7rem;
+  }
+}

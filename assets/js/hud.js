@@ -89,6 +89,9 @@
         if (active > -1) links[active].removeAttribute('aria-current');
         links[idx].setAttribute('aria-current', 'true');
         active = idx;
+        // Sections that invert the page (the manifesto) need a readable index
+        if (sections[idx].hasAttribute('data-invert')) indexNav.setAttribute('data-invert', '');
+        else indexNav.removeAttribute('data-invert');
       }
       return false;
     });
