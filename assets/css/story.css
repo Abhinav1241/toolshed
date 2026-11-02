@@ -263,3 +263,237 @@
     opacity: calc(1 - var(--sp) * 2.2);
   }
 }
+
+/* ---------- Beat 8: workbench screens with looping CSS demos ---------- */
+.wb-screens {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
+  gap: 2.5rem;
+  margin-top: 3rem;
+  perspective: 1400px;
+}
+
+.wb-screen {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--surface);
+  color: var(--text);
+  border: 2px solid var(--line);
+  border-radius: 18px;
+  box-shadow: 10px 10px 0 var(--line);
+  text-decoration: none;
+  transform-origin: 50% 50%;
+  transition: transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1), border-color 0.2s;
+}
+
+.wb-screen:hover,
+.wb-screen:focus-visible {
+  border-color: var(--accent);
+}
+
+@media (prefers-reduced-motion: no-preference) and (min-width: 720px) {
+  .wb-screen:nth-child(1) {
+    transform: rotateY(9deg) rotateX(3deg);
+  }
+
+  .wb-screen:nth-child(2) {
+    transform: rotateY(-9deg) rotateX(3deg);
+  }
+
+  .wb-screen:hover,
+  .wb-screen:focus-visible {
+    transform: rotateY(0) rotateX(0) translateY(-4px);
+  }
+}
+
+.screen-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.6rem 0.9rem;
+  border-bottom: 2px solid var(--line);
+}
+
+.screen-bar i {
+  width: 10px;
+  height: 10px;
+  border: 2px solid var(--line);
+  border-radius: 50%;
+}
+
+.screen-bar .label {
+  margin-left: auto;
+}
+
+.screen-demo {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 15rem;
+  background: radial-gradient(var(--line) 1.5px, transparent 1.6px) 0 0 / 24px 24px, var(--bg);
+  overflow: hidden;
+}
+
+.screen-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1.25rem 1.5rem 1.5rem;
+}
+
+.demo-size {
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  translate: -50% 0;
+  padding: 0.25rem 0.75rem;
+  background: var(--surface);
+  border: 2px solid var(--line);
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Image demo: the file shrinks while its size ticks down */
+@property --kb {
+  syntax: '<integer>';
+  inherits: false;
+  initial-value: 640;
+}
+
+.demo-file {
+  display: grid;
+  place-items: center;
+  width: 7.5rem;
+  height: 7.5rem;
+  background: var(--surface);
+  border: 2px solid var(--accent);
+  border-radius: 14px;
+  color: var(--accent);
+}
+
+.demo-file svg {
+  width: 56%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.75;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.demo-count {
+  --kb: 640;
+  counter-reset: kb var(--kb);
+}
+
+.demo-count::before {
+  content: counter(kb);
+}
+
+.demo-meter {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  right: 1rem;
+  height: 6px;
+  border: 2px solid var(--line);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.demo-meter span {
+  display: block;
+  height: 100%;
+  background: var(--accent);
+  transform-origin: left center;
+  transform: scaleX(0.15);
+}
+
+/* PDF demo: three pages slide together into one */
+.demo-page {
+  position: absolute;
+  width: 5.5rem;
+  height: 7.2rem;
+  background: var(--surface);
+  border: 2px solid var(--line);
+  border-radius: 8px;
+  background-image:
+    linear-gradient(var(--line) 2px, transparent 2px),
+    linear-gradient(var(--line) 2px, transparent 2px),
+    linear-gradient(var(--line) 2px, transparent 2px);
+  background-size: 60% 2px, 80% 2px, 45% 2px;
+  background-position: 12% 28%, 12% 46%, 12% 64%;
+  background-repeat: no-repeat;
+}
+
+.demo-page.p1 { translate: -4.5rem 0; rotate: -8deg; }
+.demo-page.p2 { translate: 0 0; z-index: 1; border-color: var(--accent); }
+.demo-page.p3 { translate: 4.5rem 0; rotate: 8deg; }
+
+.demo-merged {
+  color: var(--accent);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .demo-file {
+    animation: demo-shrink 5s cubic-bezier(0.6, 0, 0.3, 1) infinite;
+  }
+
+  .demo-count {
+    animation: demo-kb 5s cubic-bezier(0.6, 0, 0.3, 1) infinite;
+  }
+
+  .demo-meter span {
+    animation: demo-meter 5s cubic-bezier(0.6, 0, 0.3, 1) infinite;
+  }
+
+  .demo-page.p1 { animation: demo-p1 5s cubic-bezier(0.6, 0, 0.3, 1) infinite; }
+  .demo-page.p3 { animation: demo-p3 5s cubic-bezier(0.6, 0, 0.3, 1) infinite; }
+  .demo-page.p2 { animation: demo-p2 5s cubic-bezier(0.6, 0, 0.3, 1) infinite; }
+  .demo-merged { animation: demo-label 5s steps(1) infinite; }
+
+  @keyframes demo-shrink {
+    0%, 12% { transform: scale(1.15); }
+    55%, 88% { transform: scale(0.55); }
+    100% { transform: scale(1.15); }
+  }
+
+  @keyframes demo-kb {
+    0%, 12% { --kb: 4200; }
+    55%, 88% { --kb: 640; }
+    100% { --kb: 4200; }
+  }
+
+  @keyframes demo-meter {
+    0%, 12% { transform: scaleX(1); }
+    55%, 88% { transform: scaleX(0.15); }
+    100% { transform: scaleX(1); }
+  }
+
+  @keyframes demo-p1 {
+    0%, 15% { transform: translateX(0); }
+    55%, 88% { transform: translateX(4.5rem); }
+    100% { transform: translateX(0); }
+  }
+
+  @keyframes demo-p3 {
+    0%, 15% { transform: translateX(0); }
+    55%, 88% { transform: translateX(-4.5rem); }
+    100% { transform: translateX(0); }
+  }
+
+  @keyframes demo-p2 {
+    0%, 15% { transform: scale(1); }
+    55%, 88% { transform: scale(1.06); }
+    100% { transform: scale(1); }
+  }
+
+  @keyframes demo-label {
+    0% { opacity: 0.45; }
+    55% { opacity: 1; }
+    92% { opacity: 0.45; }
+  }
+}

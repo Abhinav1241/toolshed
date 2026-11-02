@@ -19,41 +19,6 @@
   letter-spacing: -0.03em;
 }
 
-.wb-tiles {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
-  gap: 1rem;
-  margin-top: 2rem;
-}
-
-.wb-tile {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
-  min-height: 16rem;
-  padding: 1.5rem;
-  background: var(--surface);
-  color: var(--text);
-  border: 2px solid var(--line);
-  border-radius: 14px;
-  text-decoration: none;
-}
-
-.wb-tile:hover {
-  border-color: var(--accent);
-}
-
-.wb-tile svg {
-  width: 40px;
-  height: 40px;
-  fill: none;
-  stroke: var(--accent);
-  stroke-width: 1.75;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
 .wb-name {
   margin-top: auto;
   font-size: clamp(1.5rem, 3vw, 2.25rem);
@@ -68,23 +33,6 @@
 
 .wb-go {
   color: var(--accent);
-}
-
-/* Small reveal where scroll-driven animations exist; content is visible without it */
-@supports (animation-timeline: view()) {
-  @media (prefers-reduced-motion: no-preference) {
-    .wb-tile {
-      animation: wb-in linear both;
-      animation-timeline: view();
-      animation-range: entry 0% entry 60%;
-    }
-    @keyframes wb-in {
-      from {
-        opacity: 0.2;
-        transform: translateY(2rem);
-      }
-    }
-  }
 }
 
 .site-footer {
