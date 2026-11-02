@@ -10,6 +10,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap">
   <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/ring.css">
+  <script>document.documentElement.classList.add("js")</script>
   <script src="assets/js/theme.js"></script>
 </head>
 <body>
@@ -39,6 +41,211 @@
         Scroll
       </p>
     </section>
+
+    <section class="ring-section" id="categories" data-ring-section aria-labelledby="ring-title">
+      <div class="ring-stage">
+        <div class="ring-head">
+          <h2 class="ring-title label" id="ring-title">The wall &middot; 15 categories</h2>
+          <p class="ring-hint label" aria-hidden="true">Scroll or use &larr; &rarr; to turn &middot; Enter to open</p>
+        </div>
+        <ol class="ring" data-ring aria-label="Categories">
+        <li class="panel-item" style="--i:0;--hue:30">
+          <button class="panel" type="button" data-category="image" data-count="6">
+            <span class="panel-hole" aria-hidden="true"></span>
+            <span class="panel-stripe" aria-hidden="true"></span>
+            <span class="label panel-num" aria-hidden="true">01</span>
+            <span class="panel-name">Image</span>
+            <span class="panel-extra">
+              <span class="label panel-count">6 tools</span>
+              <span class="panel-samples">Resize · Compress · Crop</span>
+            </span>
+          </button>
+        </li>
+        <li class="panel-item" style="--i:1;--hue:54">
+          <button class="panel" type="button" data-category="pdf" data-count="5">
+            <span class="panel-hole" aria-hidden="true"></span>
+            <span class="panel-stripe" aria-hidden="true"></span>
+            <span class="label panel-num" aria-hidden="true">02</span>
+            <span class="panel-name">PDF</span>
+            <span class="panel-extra">
+              <span class="label panel-count">5 tools</span>
+              <span class="panel-samples">Merge · Split · Extract pages</span>
+            </span>
+          </button>
+        </li>
+        <li class="panel-item" style="--i:2;--hue:78">
+          <button class="panel" type="button" data-category="text" data-count="5">
+            <span class="panel-hole" aria-hidden="true"></span>
+            <span class="panel-stripe" aria-hidden="true"></span>
+            <span class="label panel-num" aria-hidden="true">03</span>
+            <span class="panel-name">Text</span>
+            <span class="panel-extra">
+              <span class="label panel-count">5 tools</span>
+              <span class="panel-samples">Word counter · Case converter · Diff checker</span>
+            </span>
+          </button>
+        </li>
+        <li class="panel-item" style="--i:3;--hue:102">
+          <button class="panel" type="button" data-category="developer" data-count="6">
+            <span class="panel-hole" aria-hidden="true"></span>
+            <span class="panel-stripe" aria-hidden="true"></span>
+            <span class="label panel-num" aria-hidden="true">04</span>
+            <span class="panel-name">Developer</span>
+            <span class="panel-extra">
+              <span class="label panel-count">6 tools</span>
+              <span class="panel-samples">JSON formatter · Regex tester · Diff viewer</span>
+            </span>
+          </button>
+        </li>
+        <li class="panel-item" style="--i:4;--hue:126">
+          <button class="panel" type="button" data-category="data" data-count="4">
+            <span class="panel-hole" aria-hidden="true"></span>
+            <span class="panel-stripe" aria-hidden="true"></span>
+            <span class="label panel-num" aria-hidden="true">05</span>
+            <span class="panel-name">Data</span>
+            <span class="panel-extra">
+              <span class="label panel-count">4 tools</span>
+              <span class="panel-samples">CSV to JSON · YAML to JSON · Table sorter</span>
+            </span>
+          </button>
+        </li>
+        <li class="panel-item" style="--i:5;--hue:150">
+          <button class="panel" type="button" data-category="colour" data-count="4">
+            <span class="panel-hole" aria-hidden="true"></span>
+            <span class="panel-stripe" aria-hidden="true"></span>
+            <span class="label panel-num" aria-hidden="true">06</span>
+            <span class="panel-name">Colour</span>
+            <span class="panel-extra">
+              <span class="label panel-count">4 tools</span>
+              <span class="panel-samples">Palette maker · Contrast checker · Gradient picker</span>
+            </span>
+          </button>
+        </li>
+        <li class="panel-item" style="--i:6;--hue:174">
+          <button class="panel" type="button" data-category="calculators" data-count="4">
+            <span class="panel-hole" aria-hidden="true"></span>
+            <span class="panel-stripe" aria-hidden="true"></span>
+            <span class="label panel-num" aria-hidden="true">07</span>
+            <span class="panel-name">Calculators</span>
+            <span class="panel-extra">
+              <span class="label panel-count">4 tools</span>
+              <span class="panel-samples">Percentage · Tip splitter · Loan</span>
+            </span>
+          </button>
+        </li>
+        <li class="panel-item" style="--i:7;--hue:198">
+          <button class="panel" type="button" data-category="converters" data-count="4">
+            <span class="panel-hole" aria-hidden="true"></span>
+            <span class="panel-stripe" aria-hidden="true"></span>
+            <span class="label panel-num" aria-hidden="true">08</span>
+            <span class="panel-name">Converters</span>
+            <span class="panel-extra">
+              <span class="label panel-count">4 tools</span>
+              <span class="panel-samples">Units · Currency · Bases</span>
+            </span>
+          </button>
+        </li>
+        <li class="panel-item" style="--i:8;--hue:222">
+          <button class="panel" type="button" data-category="time" data-count="4">
+            <span class="panel-hole" aria-hidden="true"></span>
+            <span class="panel-stripe" aria-hidden="true"></span>
+            <span class="label panel-num" aria-hidden="true">09</span>
+            <span class="panel-name">Time</span>
+            <span class="panel-extra">
+              <span class="label panel-count">4 tools</span>
+              <span class="panel-samples">Timezones · Date diff · Countdown</span>
+            </span>
+          </button>
+        </li>
+        <li class="panel-item" style="--i:9;--hue:246">
+          <button class="panel" type="button" data-category="security" data-count="4">
+            <span class="panel-hole" aria-hidden="true"></span>
+            <span class="panel-stripe" aria-hidden="true"></span>
+            <span class="label panel-num" aria-hidden="true">10</span>
+            <span class="panel-name">Security</span>
+            <span class="panel-extra">
+              <span class="label panel-count">4 tools</span>
+              <span class="panel-samples">Password maker · Hash · Passphrase</span>
+            </span>
+          </button>
+        </li>
+        <li class="panel-item" style="--i:10;--hue:270">
+          <button class="panel" type="button" data-category="encoding" data-count="4">
+            <span class="panel-hole" aria-hidden="true"></span>
+            <span class="panel-stripe" aria-hidden="true"></span>
+            <span class="label panel-num" aria-hidden="true">11</span>
+            <span class="panel-name">Encoding</span>
+            <span class="panel-extra">
+              <span class="label panel-count">4 tools</span>
+              <span class="panel-samples">Base64 · URL encode · HTML entities</span>
+            </span>
+          </button>
+        </li>
+        <li class="panel-item" style="--i:11;--hue:294">
+          <button class="panel" type="button" data-category="math" data-count="4">
+            <span class="panel-hole" aria-hidden="true"></span>
+            <span class="panel-stripe" aria-hidden="true"></span>
+            <span class="label panel-num" aria-hidden="true">12</span>
+            <span class="panel-name">Math</span>
+            <span class="panel-extra">
+              <span class="label panel-count">4 tools</span>
+              <span class="panel-samples">Fractions · Primes · Statistics</span>
+            </span>
+          </button>
+        </li>
+        <li class="panel-item" style="--i:12;--hue:318">
+          <button class="panel" type="button" data-category="web" data-count="4">
+            <span class="panel-hole" aria-hidden="true"></span>
+            <span class="panel-stripe" aria-hidden="true"></span>
+            <span class="label panel-num" aria-hidden="true">13</span>
+            <span class="panel-name">Web</span>
+            <span class="panel-extra">
+              <span class="label panel-count">4 tools</span>
+              <span class="panel-samples">Meta tags · Slugify · UTM builder</span>
+            </span>
+          </button>
+        </li>
+        <li class="panel-item" style="--i:13;--hue:342">
+          <button class="panel" type="button" data-category="productivity" data-count="4">
+            <span class="panel-hole" aria-hidden="true"></span>
+            <span class="panel-stripe" aria-hidden="true"></span>
+            <span class="label panel-num" aria-hidden="true">14</span>
+            <span class="panel-name">Productivity</span>
+            <span class="panel-extra">
+              <span class="label panel-count">4 tools</span>
+              <span class="panel-samples">Pomodoro · Checklist · Notepad</span>
+            </span>
+          </button>
+        </li>
+        <li class="panel-item" style="--i:14;--hue:366">
+          <button class="panel" type="button" data-category="fun" data-count="4">
+            <span class="panel-hole" aria-hidden="true"></span>
+            <span class="panel-stripe" aria-hidden="true"></span>
+            <span class="label panel-num" aria-hidden="true">15</span>
+            <span class="panel-name">Fun</span>
+            <span class="panel-extra">
+              <span class="label panel-count">4 tools</span>
+              <span class="panel-samples">Dice · Coin flip · Random picker</span>
+            </span>
+          </button>
+        </li>
+        </ol>
+        <p class="ring-index label" aria-hidden="true"><span data-ring-current>01</span> / 15</p>
+      </div>
+    </section>
   </main>
+
+  <div class="category-view" data-category-view hidden role="dialog" aria-modal="true" aria-labelledby="cv-title">
+    <div class="cv-stripe" aria-hidden="true"></div>
+    <button class="cv-back" type="button" data-category-close>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
+      <span>Back to the wall</span>
+    </button>
+    <p class="label" data-cv-count></p>
+    <h2 class="cv-title" id="cv-title" data-cv-title></h2>
+    <p class="pitch" data-cv-samples></p>
+    <p class="label cv-note">Full tool directory arrives in the next milestone.</p>
+  </div>
+  <script src="assets/js/ring.js" defer></script>
 </body>
 </html>
