@@ -82,3 +82,43 @@ Scale: title `clamp(3rem, 12vw, 9rem)`, panel name `clamp(1.5rem, 3vw, 2.25rem)`
 - Codrops — Cinematic 3D Scroll Experiences with GSAP: pacing and typography ideas for the intro.
 - recent.design, ui.watermelon.sh: layout blocks for the workbench strip and footer.
 - realtimecolors.com: preview the Pegboard tokens on a sample page before coding.
+
+## 8. Addendum: "studio site" scroll story (reverse-engineered reference)
+
+Reference: a Japanese creative studio's site (seen in a screen-recorded reel). It is built with WebGL (a Three.js-style 3D scene with custom shaders, video textures and sound). We borrow its **structure and techniques**, never its logo, triangle mark, imagery, text or colours. Toolshed keeps the Pegboard palette and its own mark.
+
+### What the reference does, beat by beat
+
+| # | Beat | What you see | How it's built (likely) |
+|---|---|---|---|
+| 1 | Loader | Glowing ring "portal" with a crosshair, on black | Shader / canvas ring that dissolves into the scene |
+| 2 | Hero | Huge logotype as 3D slabs inside a dark gridded room; a small list of latest news on the right; crosshair/compass HUD top right | 3D text meshes, grid textures on room walls, DOM overlay for the news list |
+| 3 | Section title | Next title ("WORK") in giant extruded letters that break apart as you scroll | Letters split into slabs, each animated on scroll |
+| 4 | Works carousel | Camera **inside** a gridded cylinder; project panels hang on the curved inner wall and rotate past as you scroll; caption bottom-left (date, title, tag pills), "More works" bottom-right | Panels on a cylinder, rotation tied to scroll; DOM caption swaps per active panel |
+| 5 | Brand beat | Giant glowing mark fills the screen as a chapter break | Mark mesh + bloom |
+| 6 | Manifesto | Page **flips to white**; a 3-line statement appears line by line, each line on a black highlight box; faint outline mark behind | DOM text, clip-path / scaleX reveal per line |
+| 7 | Liquid transition | Smeared RGB-split fluid wipe into the next section | Full-screen displacement shader |
+| 8 | Feature scenes | Big angled project videos, then a pastel hero for their product | Video planes in 3D, parallax |
+| 9 | Outro | Mark on black with thin wireframe grid lines | Lines drawn on scroll |
+| — | Persistent UI | Tiny mono nav top centre, contact pill top right, sound toggle bottom, vertical section index on the left, tiny coordinate labels everywhere | Fixed DOM HUD |
+
+### Toolshed version (CSS 3D + small vanilla JS, no WebGL)
+
+| Beat | Toolshed | Build |
+|---|---|---|
+| 1 Loader | "Peg hole" ring: an orange circle that draws itself (SVG stroke-dashoffset), crosshair ticks, then scales open to reveal the page. 0.9s max, runs once per session, skipped under reduced motion | SVG + CSS |
+| 2 Hero | Giant **TOOLSHED** wordmark, each letter its own slab with slight 3D tilt following the pointer (±6°). Background: a perspective **grid room** (floor + back wall made from repeating linear-gradients on transformed divs). Right column: "Recently added" list (last 5 tools from data). Top-right HUD: crosshair widget showing scroll % in mono | CSS 3D, pointer JS |
+| 3 Title break | "CATEGORIES" in giant type; as you scroll, letters drift apart on Z and fade, revealing the ring | Per-letter spans, transforms driven by scroll progress |
+| 4 **Ring (replaces §1 step 2)** | View the ring **from inside**: the stage is a dark gridded cylinder; 15 category panels sit on the inner wall facing the centre. Scroll rotates the cylinder. Caption bottom-left: `#03 · COLOUR`, category name, tool count, 3 tag pills; "Open →" bottom-right. Click/Enter opens the category (View Transition) | Panel `i`: `rotateY(i*angle) translateZ(-radius)`, flipped with an extra `rotateY(180deg)` so it faces inward; the stage wrapper rotates. Grid on the cylinder = the same panels' backgrounds + a ring of thin vertical lines |
+| 5 Brand beat | Giant peg-hook mark (our own simple SVG) in orange, scaling up as a chapter break into the Workbench | SVG + scroll scale |
+| 6 Manifesto | **Section inverts to light** regardless of theme (in light mode it inverts to dark). Three lines on highlight boxes, revealed one by one: "Free tools for everything you make." / "Sorted, searched, ready." / "Your files never leave your browser." | Each line: box `scaleX` 0→1 from left, then text fades in |
+| 7 Liquid wipe | **Skip.** Use a simple diagonal clip-path wipe in `--accent` instead | CSS clip-path |
+| 8 Feature scenes | Workbench: two big angled "screen" panels (image tool, PDF tool) with a looping CSS demo inside (e.g. a file icon shrinking with a size counter ticking down) | CSS 3D tilt + keyframes |
+| 9 Outro | Mark + thin grid lines drawing in; footer with search box and links | SVG strokes |
+| HUD | Fixed: mono nav top centre (Directory · Workbench · About · GitHub), theme toggle top right, vertical section index on the left (01–06, active one in accent), scroll % in the crosshair | Fixed DOM, IntersectionObserver for active section |
+
+### Rules for this addendum
+- All motion respects `prefers-reduced-motion`: no loader, no tilt, no letter drift; ring becomes the flat grid; reveals become instant.
+- Under 720px: no pointer tilt, ring radius scales to viewport, HUD index hidden.
+- Max 15 animated 3D elements on screen at once; animate only `transform` and `opacity`; one `requestAnimationFrame` loop drives everything.
+- No sound, no video files, no WebGL in v1. A Three.js (MIT) upgrade of beats 2–4 and the liquid wipe is a possible v2.

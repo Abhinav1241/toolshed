@@ -140,5 +140,8 @@
     };
   });
 
-  window.TOOLSHED = { categories: CATEGORIES, tools: TOOLS };
+  // Newest first. The landing page shows these under "Recently added".
+  var RECENT = ['images-to-pdf', 'favicon-maker', 'open-graph-preview', 'pomodoro-timer', 'timezone-converter'];
+
+  window.TOOLSHED = { categories: CATEGORIES, tools: TOOLS, recent: RECENT };
 })();

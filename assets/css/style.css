@@ -67,6 +67,18 @@ a {
   outline-offset: 3px;
 }
 
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 .label {
   font-family: var(--font-mono);
   font-size: 0.75rem;
@@ -238,26 +250,8 @@ a {
   }
 }
 
-/* Progressive enhancement: intro text eases in as it scrolls out */
-@supports (animation-timeline: view()) {
-  .intro-inner {
-    animation: intro-out linear both;
-    animation-timeline: view();
-    animation-range: exit 0% exit 70%;
-  }
-  @keyframes intro-out {
-    to {
-      opacity: 0.15;
-      transform: translateY(-3rem);
-    }
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
   .scroll-hint svg {
-    animation: none;
-  }
-  .intro-inner {
     animation: none;
   }
 }
