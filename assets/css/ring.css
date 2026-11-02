@@ -2,14 +2,33 @@
 :root {
   --tint-l: 0.72;
   --tint-c: 0.09;
+  /* Lit-window panels: lightness of fill, ink, soft ink, art, tag, edge */
+  --pan-fill: 0.33;
+  --pan-ink: 0.96;
+  --pan-soft: 0.86;
+  --pan-art: 0.86;
+  --pan-tag: 0.21;
+  --pan-edge: 0.45;
 }
 @media (prefers-color-scheme: light) {
   :root:not([data-theme='dark']) {
     --tint-l: 0.55;
+    --pan-fill: 0.89;
+    --pan-ink: 0.2;
+    --pan-soft: 0.36;
+    --pan-art: 0.42;
+    --pan-tag: 0.975;
+    --pan-edge: 0.72;
   }
 }
 :root[data-theme='light'] {
   --tint-l: 0.55;
+  --pan-fill: 0.89;
+  --pan-ink: 0.2;
+  --pan-soft: 0.36;
+  --pan-art: 0.42;
+  --pan-tag: 0.975;
+  --pan-edge: 0.72;
 }
 
 html {
@@ -58,12 +77,12 @@ html {
   flex-direction: column;
   width: 100%;
   height: 100%;
-  min-height: 15rem;
+  min-height: 21rem;
   padding: 2.5rem 1.25rem 1.25rem;
   text-align: left;
-  background: var(--surface);
-  color: var(--text);
-  border: 2px solid var(--line);
+  background: oklch(var(--pan-fill) 0.06 var(--hue));
+  color: oklch(var(--pan-ink) 0.02 var(--hue));
+  border: 2px solid oklch(var(--pan-edge) 0.05 var(--hue));
   border-radius: 14px;
   font: inherit;
   cursor: pointer;
@@ -97,6 +116,69 @@ html {
   position: absolute;
   top: 0.9rem;
   left: 1.25rem;
+  color: oklch(var(--pan-soft) 0.04 var(--hue));
+}
+
+/* Line-art illustration, drawn per category in index.html */
+.panel-art {
+  position: absolute;
+  top: 2.4rem;
+  left: 50%;
+  width: min(52%, 10rem);
+  translate: -50% 0;
+  color: oklch(var(--pan-art) 0.11 var(--hue));
+}
+
+.panel-art svg {
+  display: block;
+  width: 100%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.panel-art .pip {
+  fill: currentColor;
+  stroke: none;
+}
+
+/* Tool names hanging like labels on pegs */
+.panel-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.4rem;
+  margin-top: 0.6rem;
+}
+
+.panel-tags span {
+  position: relative;
+  padding: 0.12rem 0.5rem 0.12rem 1.05rem;
+  background: oklch(var(--pan-tag) 0.03 var(--hue));
+  color: oklch(var(--pan-ink) 0.02 var(--hue));
+  border-radius: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  line-height: 1.5;
+  white-space: nowrap;
+  rotate: -1.5deg;
+}
+
+.panel-tags span:nth-child(even) {
+  rotate: 1.5deg;
+}
+
+.panel-tags span::before {
+  content: '';
+  position: absolute;
+  left: 0.42rem;
+  top: 50%;
+  width: 0.32rem;
+  height: 0.32rem;
+  margin-top: -0.16rem;
+  border-radius: 50%;
+  background: oklch(var(--pan-fill) 0.06 var(--hue));
 }
 
 .panel-name {
@@ -115,13 +197,18 @@ html {
 }
 
 .panel-count {
-  color: var(--accent);
+  color: oklch(var(--pan-soft) 0.04 var(--hue));
 }
 
+/* The tags show the samples; keep the sentence for screen readers */
 .panel-samples {
-  color: var(--muted);
-  font-size: 0.9rem;
-  line-height: 1.4;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
 }
 
 /* The ring seen from inside (motion allowed + JS). DESIGN_BRIEF section 8, beat 4:

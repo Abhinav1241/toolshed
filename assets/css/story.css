@@ -38,8 +38,8 @@
   html.js .brand-beat {
     --sp: 0;
     display: block;
-    height: 280vh;
-    height: 280svh;
+    height: 190vh;
+    height: 190svh;
     min-height: 0;
     padding: 0;
   }
@@ -573,8 +573,8 @@
 @media (prefers-reduced-motion: no-preference) {
   html.js .outro {
     --sp: 0;
-    height: 220vh;
-    height: 220svh;
+    height: 160vh;
+    height: 160svh;
   }
 
   html.js .outro .story-stage {
