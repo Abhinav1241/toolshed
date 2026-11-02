@@ -53,9 +53,9 @@ The site needs no build. After pushing to GitHub:
 2. Under **Build and deployment**, choose **Deploy from a branch**.
 3. Pick the `main` branch and the `/ (root)` folder, then save.
 
-The site appears at `https://<your-user>.github.io/<repo>/`. All paths are relative, so it works from that sub-path. A `.nojekyll` file is included so GitHub serves the files as they are.
+The site appears at `https://abhinav1241.github.io/toolshed/`. All paths are relative, so it works from that sub-path. A `.nojekyll` file is included so GitHub serves the files as they are.
 
-Before publishing, replace `YOUR-USER` in the footer links (`index.html`, `tools/image.html`, `tools/pdf.html`) and in this file with your GitHub username and repository name.
+If you fork the project, change the GitHub links in the footers of `index.html`, `tools/image.html` and `tools/pdf.html` to your own repository.
 
 ## Licence
 
