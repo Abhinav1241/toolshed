@@ -142,6 +142,8 @@
   function setOpen(isOpen) {
     view.hidden = !isOpen;
     main.inert = isOpen;
+    var footer = document.querySelector('[data-footer]');
+    if (footer) footer.inert = isOpen;
     header.inert = isOpen;
     document.documentElement.style.overflow = isOpen ? 'hidden' : '';
   }
@@ -186,6 +188,13 @@
       if (btn) btn.focus({ preventScroll: true });
     });
   }
+
+  // Lets the footer search open a drawer by category id
+  window.Toolshed.openCategory = function (id) {
+    for (var i = 0; i < buttons.length; i++) {
+      if (buttons[i].dataset.category === id) return openCategory(i);
+    }
+  };
 
   view.querySelector('[data-category-close]').addEventListener('click', closeCategory);
   document.addEventListener('keydown', function (e) {

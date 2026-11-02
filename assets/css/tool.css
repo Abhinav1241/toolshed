@@ -15,11 +15,6 @@
   border: 0;
 }
 
-.site-header {
-  background: var(--bg);
-  border-bottom: 2px solid var(--line);
-}
-
 .tool-page {
   max-width: 60rem;
   margin: 0 auto;
