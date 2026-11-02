@@ -23,7 +23,7 @@
   ];
 
   var ROWS = [
-    ['image', 'Image resize & compress', 'Shrink photos by size or quality and download the result.', 'resize,compress,jpg,png,webp'],
+    ['image', 'Image resize & compress', 'Shrink photos by size or quality and download the result.', 'resize,compress,jpg,png,webp', 'tools/image.html'],
     ['image', 'Crop & rotate', 'Trim to a region, then rotate or flip.', 'crop,rotate,flip'],
     ['image', 'Format converter', 'Switch between PNG, JPG and WebP.', 'convert,png,jpg,webp'],
     ['image', 'EXIF viewer', 'See the metadata hiding inside a photo.', 'metadata,exif,privacy'],
