@@ -497,3 +497,91 @@
     92% { opacity: 0.45; }
   }
 }
+
+/* ---------- Beat 9: outro, wireframe grid and mark drawing in ---------- */
+.outro .story-stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 70vh;
+  overflow: hidden;
+  border-top: 2px solid var(--line);
+}
+
+.outro-art {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  fill: none;
+}
+
+.outro-grid line {
+  stroke: var(--line);
+  stroke-width: 1.5;
+  stroke-dasharray: 1;
+  stroke-dashoffset: calc(1 - clamp(0, (var(--sp) * 1.4 - var(--d)) * 3, 1));
+}
+
+.outro-mark circle,
+.outro-mark path {
+  stroke: var(--accent);
+  stroke-width: 0.9;
+  stroke-linecap: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: calc(1 - clamp(0, (var(--sp) * 1.4 - var(--d)) * 3, 1));
+}
+
+.outro-copy {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: 1.25rem;
+  padding: 1rem;
+  margin-top: min(46vmin, 22rem);
+  text-align: center;
+  opacity: clamp(0, calc((var(--sp) - 0.7) * 5), 1);
+}
+
+.outro-line {
+  margin: 0;
+  padding: 0.1em 0.4em;
+  background: var(--bg);
+  font-size: clamp(1.75rem, 5vw, 3.75rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+
+.outro-top {
+  padding: 0.5rem 1rem;
+  background: var(--bg);
+  border: 2px solid var(--line);
+  border-radius: 14px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.outro-top:hover {
+  border-color: var(--accent);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html.js .outro {
+    --sp: 0;
+    height: 220vh;
+    height: 220svh;
+  }
+
+  html.js .outro .story-stage {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    height: 100svh;
+    border-top: 0;
+  }
+}
