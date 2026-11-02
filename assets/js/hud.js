@@ -166,6 +166,30 @@
     });
   }
 
+  /* ---------- Story sections (beats 5-9): [data-story] gets --sp, its pinned scroll progress 0..1 ---------- */
+  var stories = Array.prototype.slice.call(document.querySelectorAll('[data-story]'));
+  var prevSp = new Map();
+
+  if (stories.length) {
+    window.ToolshedFx.add(function () {
+      var on = !reduce.matches && root.classList.contains('js');
+      stories.forEach(function (el) {
+        var run = el.offsetHeight - window.innerHeight;
+        if (!on || !el.offsetParent || run <= 40) {
+          if (prevSp.has(el)) { el.style.removeProperty('--sp'); prevSp.delete(el); }
+          return;
+        }
+        var p = clamp(-el.getBoundingClientRect().top / run, 0, 1);
+        var last = prevSp.get(el);
+        if (last === undefined || Math.abs(p - last) > 0.002 || (p !== last && (p === 0 || p === 1))) {
+          prevSp.set(el, p);
+          el.style.setProperty('--sp', p.toFixed(3));
+        }
+      });
+      return false;
+    });
+  }
+
   /* ---------- Recently added (from data) ---------- */
   var list = document.querySelector('[data-recent]');
   var data = window.TOOLSHED;

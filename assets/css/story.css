@@ -1,0 +1,79 @@
+/* Scroll story, beats 5-9 (DESIGN_BRIEF section 8).
+   Every [data-story] section reads --sp (0..1, set by hud.js while it is pinned).
+   Without JS or with reduced motion --sp stays at 1, so each beat shows its finished state. */
+
+.story {
+  --sp: 1;
+}
+
+.story-label {
+  margin: 0;
+}
+
+/* ---------- Beat 5: brand mark ---------- */
+.brand-beat {
+  display: grid;
+  place-items: center;
+  min-height: 60vh;
+  padding: 4rem 1rem;
+}
+
+.mark-big {
+  width: min(46vmin, 16rem);
+  overflow: visible;
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.brand-beat .story-stage {
+  display: grid;
+  gap: 1.5rem;
+  justify-items: center;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html.js .brand-beat {
+    --sp: 0;
+    display: block;
+    height: 280vh;
+    height: 280svh;
+    min-height: 0;
+    padding: 0;
+  }
+
+  html.js .story-stage {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    height: 100svh;
+    overflow: hidden;
+    display: grid;
+    place-items: center;
+  }
+
+  /* Zoom into the hole of the mark, then flood with accent */
+  html.js .mark-big {
+    width: min(46vmin, 28rem);
+    transform-origin: 50% 26.5%;
+    transform: scale(calc(0.6 + var(--sp) * var(--sp) * 45));
+  }
+
+  html.js .brand-beat .story-stage::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--accent);
+    opacity: clamp(0, calc((var(--sp) - 0.8) * 6), 1);
+    pointer-events: none;
+  }
+
+  html.js .brand-beat .story-label {
+    position: absolute;
+    bottom: 2rem;
+    left: clamp(1rem, 4vw, 2.5rem);
+    opacity: calc(1 - var(--sp) * 3);
+  }
+}
