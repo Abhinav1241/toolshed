@@ -209,12 +209,135 @@ html {
   position: fixed;
   inset: 0;
   z-index: 30;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 6rem clamp(1rem, 4vw, 2.5rem) 3rem;
+  padding: 5rem clamp(1rem, 4vw, 2.5rem) 3rem;
   background: radial-gradient(var(--line) 1.5px, transparent 1.6px) 0 0 / 24px 24px, var(--bg);
   overflow-y: auto;
+}
+
+.cv-inner {
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+.cv-inner > .label:first-child {
+  margin: 1rem 0 0;
+}
+
+.cv-tools {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  max-width: 40rem;
+}
+
+.cv-search {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: var(--surface);
+  color: var(--text);
+  border: 2px solid var(--line);
+  border-radius: 14px;
+  font: inherit;
+}
+
+.cv-search::placeholder {
+  color: var(--muted);
+}
+
+.cv-search:focus-visible {
+  border-color: var(--accent);
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.chip {
+  padding: 0.3rem 0.7rem;
+  background: transparent;
+  color: var(--muted);
+  border: 2px solid var(--line);
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+}
+
+.chip:hover {
+  border-color: var(--accent);
+}
+
+.chip[aria-pressed='true'] {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-ink);
+}
+
+.cv-status {
+  margin: 1.5rem 0 0.75rem;
+}
+
+.tool-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1rem;
+}
+
+.tool-card {
+  display: flex;
+  gap: 0.9rem;
+  padding: 1rem;
+  background: var(--surface);
+  border: 2px solid var(--line);
+  border-radius: 14px;
+}
+
+.monogram {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 10px;
+  background: oklch(0.82 var(--tint-c) var(--hue, 30));
+  color: #141517;
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+}
+
+.tool-body {
+  min-width: 0;
+}
+
+.tool-name {
+  margin: 0;
+  font-size: 1.1rem;
+  line-height: 1.25;
+}
+
+.tool-name a {
+  color: var(--text);
+}
+
+.tool-desc {
+  margin: 0.25rem 0 0.5rem;
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.45;
+}
+
+.tool-meta {
+  margin: 0;
+  font-size: 0.7rem;
 }
 
 .cv-stripe {

@@ -57,7 +57,7 @@
             <span class="panel-name">Image</span>
             <span class="panel-extra">
               <span class="label panel-count">6 tools</span>
-              <span class="panel-samples">Resize · Compress · Crop</span>
+              <span class="panel-samples">Image resize &amp; compress · Crop &amp; rotate · Format converter</span>
             </span>
           </button>
         </li>
@@ -69,7 +69,7 @@
             <span class="panel-name">PDF</span>
             <span class="panel-extra">
               <span class="label panel-count">5 tools</span>
-              <span class="panel-samples">Merge · Split · Extract pages</span>
+              <span class="panel-samples">PDF merge &amp; split · Reorder pages · Extract pages</span>
             </span>
           </button>
         </li>
@@ -93,7 +93,7 @@
             <span class="panel-name">Developer</span>
             <span class="panel-extra">
               <span class="label panel-count">6 tools</span>
-              <span class="panel-samples">JSON formatter · Regex tester · Diff viewer</span>
+              <span class="panel-samples">JSON formatter · Regex tester · Cron explainer</span>
             </span>
           </button>
         </li>
@@ -105,7 +105,7 @@
             <span class="panel-name">Data</span>
             <span class="panel-extra">
               <span class="label panel-count">4 tools</span>
-              <span class="panel-samples">CSV to JSON · YAML to JSON · Table sorter</span>
+              <span class="panel-samples">CSV to JSON · JSON to CSV · YAML to JSON</span>
             </span>
           </button>
         </li>
@@ -129,7 +129,7 @@
             <span class="panel-name">Calculators</span>
             <span class="panel-extra">
               <span class="label panel-count">4 tools</span>
-              <span class="panel-samples">Percentage · Tip splitter · Loan</span>
+              <span class="panel-samples">Percentage calculator · Tip splitter · Loan calculator</span>
             </span>
           </button>
         </li>
@@ -141,7 +141,7 @@
             <span class="panel-name">Converters</span>
             <span class="panel-extra">
               <span class="label panel-count">4 tools</span>
-              <span class="panel-samples">Units · Currency · Bases</span>
+              <span class="panel-samples">Unit converter · Temperature converter · Number bases</span>
             </span>
           </button>
         </li>
@@ -153,7 +153,7 @@
             <span class="panel-name">Time</span>
             <span class="panel-extra">
               <span class="label panel-count">4 tools</span>
-              <span class="panel-samples">Timezones · Date diff · Countdown</span>
+              <span class="panel-samples">Timezone converter · Date difference · Countdown timer</span>
             </span>
           </button>
         </li>
@@ -165,7 +165,7 @@
             <span class="panel-name">Security</span>
             <span class="panel-extra">
               <span class="label panel-count">4 tools</span>
-              <span class="panel-samples">Password maker · Hash · Passphrase</span>
+              <span class="panel-samples">Password generator · Hash generator · Passphrase maker</span>
             </span>
           </button>
         </li>
@@ -177,7 +177,7 @@
             <span class="panel-name">Encoding</span>
             <span class="panel-extra">
               <span class="label panel-count">4 tools</span>
-              <span class="panel-samples">Base64 · URL encode · HTML entities</span>
+              <span class="panel-samples">Base64 · URL encode &amp; decode · HTML entities</span>
             </span>
           </button>
         </li>
@@ -189,7 +189,7 @@
             <span class="panel-name">Math</span>
             <span class="panel-extra">
               <span class="label panel-count">4 tools</span>
-              <span class="panel-samples">Fractions · Primes · Statistics</span>
+              <span class="panel-samples">Fractions · Prime checker · Statistics</span>
             </span>
           </button>
         </li>
@@ -201,7 +201,7 @@
             <span class="panel-name">Web</span>
             <span class="panel-extra">
               <span class="label panel-count">4 tools</span>
-              <span class="panel-samples">Meta tags · Slugify · UTM builder</span>
+              <span class="panel-samples">Meta tag builder · Slugify · UTM builder</span>
             </span>
           </button>
         </li>
@@ -213,7 +213,7 @@
             <span class="panel-name">Productivity</span>
             <span class="panel-extra">
               <span class="label panel-count">4 tools</span>
-              <span class="panel-samples">Pomodoro · Checklist · Notepad</span>
+              <span class="panel-samples">Pomodoro timer · Checklist · Notepad</span>
             </span>
           </button>
         </li>
@@ -225,7 +225,7 @@
             <span class="panel-name">Fun</span>
             <span class="panel-extra">
               <span class="label panel-count">4 tools</span>
-              <span class="panel-samples">Dice · Coin flip · Random picker</span>
+              <span class="panel-samples">Dice roller · Coin flip · Random picker</span>
             </span>
           </button>
         </li>
@@ -241,11 +241,21 @@
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
       <span>Back to the wall</span>
     </button>
-    <p class="label" data-cv-count></p>
-    <h2 class="cv-title" id="cv-title" data-cv-title></h2>
-    <p class="pitch" data-cv-samples></p>
-    <p class="label cv-note">Full tool directory arrives in the next milestone.</p>
+    <div class="cv-inner">
+      <p class="label" data-cv-count></p>
+      <h2 class="cv-title" id="cv-title" data-cv-title></h2>
+      <p class="pitch" data-cv-blurb></p>
+      <div class="cv-tools">
+        <label class="label" for="cv-search">Search this drawer</label>
+        <input class="cv-search" id="cv-search" type="search" data-cv-search placeholder="Type to filter" autocomplete="off" spellcheck="false">
+        <div class="chips" role="group" aria-label="Filter by tag" data-cv-chips></div>
+      </div>
+      <p class="label cv-status" role="status" aria-live="polite" data-cv-status></p>
+      <ul class="tool-grid" data-cv-grid></ul>
+    </div>
   </div>
+  <script src="data/tools.js"></script>
+  <script src="assets/js/category.js" defer></script>
   <script src="assets/js/ring.js" defer></script>
 </body>
 </html>

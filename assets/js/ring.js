@@ -136,11 +136,7 @@
 
   // Category view
   function fill(i) {
-    var btn = buttons[i];
-    view.style.setProperty('--hue', items[i].style.getPropertyValue('--hue'));
-    view.querySelector('[data-cv-title]').textContent = btn.querySelector('.panel-name').textContent;
-    view.querySelector('[data-cv-count]').textContent = btn.dataset.count + ' tools';
-    view.querySelector('[data-cv-samples]').textContent = btn.querySelector('.panel-samples').textContent;
+    window.Toolshed.renderCategory(buttons[i].dataset.category, items[i].style.getPropertyValue('--hue'));
   }
 
   function setOpen(isOpen) {
