@@ -148,6 +148,24 @@
     });
   }
 
+  /* ---------- Title break (beat 3): scroll progress for the letters ---------- */
+  var tb = document.querySelector('[data-title-break]');
+  var tbStage = tb && tb.querySelector('.tb-stage');
+  var lastTp = -1;
+
+  if (tb && tbStage) {
+    window.ToolshedFx.add(function () {
+      if (!tb.offsetParent) return false; // hidden (reduced motion or no JS)
+      var run = tb.offsetHeight - window.innerHeight;
+      var p = run > 0 ? clamp(-tb.getBoundingClientRect().top / run, 0, 1) : 0;
+      if (Math.abs(p - lastTp) > 0.002) {
+        lastTp = p;
+        tbStage.style.setProperty('--tp', p.toFixed(3));
+      }
+      return false;
+    });
+  }
+
   /* ---------- Recently added (from data) ---------- */
   var list = document.querySelector('[data-recent]');
   var data = window.TOOLSHED;

@@ -1,0 +1,83 @@
+/* Beat 3: "CATEGORIES" breaks apart on Z as you scroll, revealing the ring beneath.
+   Only with JS and motion allowed; otherwise the flat grid keeps its own heading. */
+
+.title-break {
+  display: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html.js .title-break {
+    position: relative;
+    z-index: 2;
+    display: block;
+    height: 200vh;
+    height: 200svh;
+    pointer-events: none;
+  }
+
+  /* The ring slides up underneath the pinned title */
+  html.js .title-break + .ring-section {
+    position: relative;
+    margin-top: -100vh;
+    margin-top: -100svh;
+  }
+
+  .tb-stage {
+    --tp: 0;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    height: 100svh;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    perspective: 900px;
+  }
+
+  .tb-word {
+    display: flex;
+    margin: 0;
+    font-size: min(14.2vw, 15rem);
+    font-weight: 800;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    color: var(--text);
+    transform-style: preserve-3d;
+  }
+
+  .tl {
+    display: inline-block;
+    transform:
+      translate3d(calc(var(--tp) * var(--dx)), calc(var(--tp) * var(--dy)), calc(var(--tp) * var(--dz)))
+      rotateX(calc(var(--tp) * var(--rx)))
+      rotateY(calc(var(--tp) * var(--ry)));
+    opacity: calc(1.15 - var(--tp) * 1.5);
+  }
+
+  .tb-label,
+  .tb-hint {
+    position: absolute;
+    left: clamp(1rem, 4vw, 2.5rem);
+    margin: 0;
+    opacity: calc(1 - var(--tp) * 2);
+  }
+
+  .tb-label {
+    top: 6rem;
+    color: var(--accent);
+  }
+
+  .tb-hint {
+    bottom: 2rem;
+  }
+}
+
+@media (max-width: 719px) {
+  .tb-word {
+    font-size: 16vw;
+  }
+
+  .tb-label {
+    top: 7.5rem;
+  }
+}
