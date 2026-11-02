@@ -116,7 +116,12 @@
     'dice-roller', 'coin-flip', 'random-picker', 'name-shuffler',
     'json-formatter', 'regex-tester', 'cron-explainer', 'jwt-decoder', 'uuid-generator', 'markdown-preview',
     'csv-to-json', 'json-to-csv', 'yaml-to-json', 'table-sorter',
-    'colour-converter', 'contrast-checker', 'palette-maker', 'gradient-picker'
+    'colour-converter', 'contrast-checker', 'palette-maker', 'gradient-picker',
+    'timezone-converter', 'date-difference', 'countdown-timer', 'unix-timestamp',
+    'fractions', 'prime-checker', 'statistics', 'number-to-words',
+    'meta-tag-builder', 'slugify', 'utm-builder', 'open-graph-preview',
+    'pomodoro-timer', 'checklist', 'notepad', 'stopwatch',
+    'crop-rotate', 'format-converter', 'exif-viewer', 'image-to-base64', 'favicon-maker', 'images-to-pdf'
   ];
 
   function slug(name) {

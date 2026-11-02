@@ -157,6 +157,64 @@
       return a;
     },
 
+    // Short beep, for timers. Silent if the browser blocks audio.
+    beep: function () {
+      try {
+        var Ctx = window.AudioContext || window.webkitAudioContext;
+        var ctx = new Ctx();
+        [0, 0.25, 0.5].forEach(function (t) {
+          var o = ctx.createOscillator();
+          var g = ctx.createGain();
+          o.frequency.value = 880;
+          g.gain.value = 0.15;
+          o.connect(g);
+          g.connect(ctx.destination);
+          o.start(ctx.currentTime + t);
+          o.stop(ctx.currentTime + t + 0.15);
+        });
+        setTimeout(function () { ctx.close(); }, 1200);
+      } catch (e) { /* ignore */ }
+    },
+
+    // localStorage that never throws
+    store: {
+      get: function (key, fallback) {
+        try {
+          var v = localStorage.getItem('toolshed:' + key);
+          return v === null ? fallback : JSON.parse(v);
+        } catch (e) { return fallback; }
+      },
+      set: function (key, value) {
+        try { localStorage.setItem('toolshed:' + key, JSON.stringify(value)); return true; } catch (e) { return false; }
+      }
+    },
+
+    // Load a script once, on demand
+    loadScript: function (url) {
+      kit._scripts = kit._scripts || {};
+      if (!kit._scripts[url]) {
+        kit._scripts[url] = new Promise(function (resolve, reject) {
+          var s = document.createElement('script');
+          s.src = url;
+          s.onload = resolve;
+          s.onerror = function () { reject(new Error('Could not load ' + url)); };
+          document.head.appendChild(s);
+        });
+      }
+      return kit._scripts[url];
+    },
+
+    download: function (blob, name) {
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement('a');
+      a.href = url;
+      a.download = name;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      setTimeout(function () { URL.revokeObjectURL(url); }, 10000);
+    },
+
     fmt: function (n, digits) {
       if (!isFinite(n)) return '—';
       return n.toLocaleString(undefined, { maximumFractionDigits: digits === undefined ? 2 : digits });
