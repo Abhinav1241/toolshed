@@ -1,0 +1,263 @@
+/* Toolshed — "Pegboard" tokens (see DESIGN_BRIEF.md §3) */
+:root {
+  color-scheme: dark;
+  --bg: #141517;
+  --surface: #1d1f22;
+  --line: #2e3135;
+  --text: #ece8e1;
+  --muted: #9c978e;
+  --accent: #ff6b2c;
+  --accent-ink: #141517;
+
+  --font-display: 'Bricolage Grotesque', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'Cascadia Mono', Consolas, monospace;
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme='dark']) {
+    color-scheme: light;
+    --bg: #eadfcb;
+    --surface: #f3eadb;
+    --line: #cdbfa6;
+    --text: #1c1b19;
+    --muted: #5e584e;
+    --accent: #a63a0a;
+    --accent-ink: #ffffff;
+  }
+}
+
+:root[data-theme='light'] {
+  color-scheme: light;
+  --bg: #eadfcb;
+  --surface: #f3eadb;
+  --line: #cdbfa6;
+  --text: #1c1b19;
+  --muted: #5e584e;
+  --accent: #a63a0a;
+  --accent-ink: #ffffff;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--bg);
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: radial-gradient(var(--line) 1.5px, transparent 1.6px) 0 0 / 24px 24px, var(--bg);
+  color: var(--text);
+  font-family: var(--font-display);
+  font-size: 1rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--accent);
+}
+
+:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+}
+
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -4rem;
+  padding: 0.5rem 1rem;
+  background: var(--accent);
+  color: var(--accent-ink);
+  border-radius: 8px;
+  z-index: 20;
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+/* Header */
+.site-header {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem clamp(1rem, 4vw, 2.5rem);
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.brand img {
+  width: 28px;
+  height: 28px;
+}
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.9rem;
+  background: var(--surface);
+  color: var(--text);
+  border: 2px solid var(--line);
+  border-radius: 14px;
+  font: inherit;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+}
+
+.theme-toggle:hover {
+  border-color: var(--accent);
+}
+
+.theme-toggle svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.75;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Show the icon for the theme you would switch to */
+.theme-toggle .icon-sun {
+  display: none;
+}
+:root[data-theme='dark'] .theme-toggle .icon-sun,
+:root:not([data-theme]) .theme-toggle .icon-sun {
+  display: block;
+}
+:root[data-theme='dark'] .theme-toggle .icon-moon,
+:root:not([data-theme]) .theme-toggle .icon-moon {
+  display: none;
+}
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme]) .theme-toggle .icon-sun {
+    display: none;
+  }
+  :root:not([data-theme]) .theme-toggle .icon-moon {
+    display: block;
+  }
+}
+
+/* Intro */
+.intro {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 6rem clamp(1rem, 4vw, 2.5rem) 5rem;
+}
+
+.intro-inner {
+  max-width: 72rem;
+}
+
+.stamp {
+  display: inline-block;
+  margin: 0 0 1.5rem;
+  padding: 0.25rem 0.75rem;
+  border: 2px solid var(--accent);
+  border-radius: 6px;
+  color: var(--accent);
+  transform: rotate(-2deg);
+}
+
+.title {
+  margin: 0;
+  font-size: clamp(3rem, 12vw, 9rem);
+  font-weight: 800;
+  font-stretch: 100%;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+}
+
+.title .dot {
+  color: var(--accent);
+}
+
+.pitch {
+  max-width: 34rem;
+  margin: 1.75rem 0 0;
+  font-size: clamp(1.125rem, 2vw, 1.375rem);
+  color: var(--muted);
+}
+
+.scroll-hint {
+  position: absolute;
+  left: clamp(1rem, 4vw, 2.5rem);
+  bottom: 2rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.scroll-hint svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1.75;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  animation: nudge 1.8s ease-in-out infinite;
+}
+
+@keyframes nudge {
+  50% {
+    transform: translateY(5px);
+  }
+}
+
+/* Progressive enhancement: intro text eases in as it scrolls out */
+@supports (animation-timeline: view()) {
+  .intro-inner {
+    animation: intro-out linear both;
+    animation-timeline: view();
+    animation-range: exit 0% exit 70%;
+  }
+  @keyframes intro-out {
+    to {
+      opacity: 0.15;
+      transform: translateY(-3rem);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-hint svg {
+    animation: none;
+  }
+  .intro-inner {
+    animation: none;
+  }
+}
