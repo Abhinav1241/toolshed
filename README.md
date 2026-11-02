@@ -10,6 +10,7 @@ Plain HTML, CSS and JavaScript. No build step, no framework, no tracking.
 |---|---|
 | Image resize & compress (JPEG, PNG, WebP) | `tools/image.html` |
 | PDF merge, reorder, remove and extract pages | `tools/pdf.html` |
+| 25 small tools: text, encoding, security, calculators, converters, fun | `tools/tool.html?id=<tool id>` |
 
 The catalogue lists 66 tools in 15 categories. Tools without a page yet are marked "Soon".
 
@@ -25,9 +26,20 @@ Then open <http://localhost:5173>. Opening `index.html` straight from disk also 
 
 ## Add a tool
 
-1. Add a row to `ROWS` in [`data/tools.js`](data/tools.js): `[category id, name, description, tags, href]`. Leave `href` out until the page exists.
-2. Build the page in `tools/` using the shared styles (`assets/css/style.css`, `assets/css/tool.css`, `assets/css/site.css`) and `assets/js/theme.js`.
-3. Update the `data-count` and sample names on the matching panel in `index.html` so the page still reads correctly without JavaScript.
+Small tools share one page, `tools/tool.html`, and a tiny UI kit in `assets/js/tool-runner.js`.
+
+1. Add a row to `ROWS` in [`data/tools.js`](data/tools.js): `[category id, name, description, tags]`. A tool's id is its name in lower case with dashes (`Word counter` becomes `word-counter`).
+2. Register it in a file under `assets/js/tools/`:
+   ```js
+   ToolshedTools.register('word-counter', function (root, kit) {
+     var box = kit.area('Your text');
+     root.appendChild(kit.group('', box.el));
+   });
+   ```
+3. Add its id to the `LIVE` list in `data/tools.js`. The card then becomes a link.
+4. If you add or remove a tool, update the `data-count` and sample names on that category's panel in `index.html`, so the page still reads correctly without JavaScript.
+
+Bigger tools (like the image and PDF ones) can have their own page in `tools/`. Give the row an `href` as its fifth item.
 
 ## Design
 

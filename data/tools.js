@@ -105,13 +105,30 @@
     ['fun', 'Name shuffler', 'Shuffle names into teams.', 'teams,shuffle,random']
   ];
 
+  // Tools that have a working page. Add the tool's id (its name in lower case,
+  // with dashes between words) once assets/js/tools/ registers it.
+  var LIVE = [
+    'word-counter', 'case-converter', 'diff-checker', 'lorem-ipsum-generator', 'duplicate-line-remover',
+    'base64', 'url-encode-decode', 'html-entities', 'morse-code',
+    'password-generator', 'hash-generator', 'passphrase-maker', 'password-strength',
+    'percentage-calculator', 'tip-splitter', 'loan-calculator', 'bmi-calculator',
+    'unit-converter', 'temperature-converter', 'number-bases', 'roman-numerals',
+    'dice-roller', 'coin-flip', 'random-picker', 'name-shuffler'
+  ];
+
+  function slug(name) {
+    return name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+  }
+
   var TOOLS = ROWS.map(function (r) {
+    var id = slug(r[1]);
     return {
+      id: id,
       category: r[0],
       name: r[1],
       desc: r[2],
       tags: r[3].split(','),
-      href: r[4] || null
+      href: r[4] || (LIVE.indexOf(id) !== -1 ? 'tools/tool.html?id=' + id : null)
     };
   });
 

@@ -402,3 +402,208 @@
   stroke-linecap: round;
   stroke-linejoin: round;
 }
+
+/* Generic small-tool UI (tools/tool.html) */
+.tool-ui {
+  display: grid;
+  gap: 1rem;
+}
+
+.tool-ui .kit-group {
+  margin: 0;
+  padding: 1rem 1.1rem 1.1rem;
+  background: var(--surface);
+  border: 2px solid var(--line);
+  border-radius: 14px;
+  display: grid;
+  gap: 0.9rem;
+  min-width: 0;
+}
+
+.tool-ui .kit-group > legend {
+  padding: 0 0.4rem;
+}
+
+.tool-ui .field-full {
+  width: 100%;
+  flex: 1 1 100%;
+}
+
+.tool-ui input[type='text'],
+.tool-ui input[type='number'],
+.tool-ui input[type='password'],
+.tool-ui select,
+.tool-ui textarea {
+  width: 100%;
+  padding: 0.6rem 0.8rem;
+  background: var(--bg);
+  color: var(--text);
+  border: 2px solid var(--line);
+  border-radius: 10px;
+  font: inherit;
+}
+
+.tool-ui textarea {
+  resize: vertical;
+  line-height: 1.5;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+}
+
+.tool-ui input:focus-visible,
+.tool-ui select:focus-visible,
+.tool-ui textarea:focus-visible {
+  border-color: var(--accent);
+}
+
+.tool-ui input[type='range'],
+.tool-ui input[type='checkbox'] {
+  accent-color: var(--accent);
+}
+
+.tool-ui .check {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.tool-ui .field-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 0.75rem 1rem;
+}
+
+.btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.out-box {
+  display: grid;
+  gap: 0.5rem;
+  justify-items: start;
+}
+
+.kit-status {
+  margin: 0;
+  min-height: 1.5em;
+  color: var(--muted);
+}
+
+.kit-status.is-error {
+  color: var(--accent);
+}
+
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr));
+  gap: 0.75rem;
+  margin: 0;
+}
+
+.stat {
+  padding: 0.75rem 0.9rem;
+  background: var(--bg);
+  border: 2px solid var(--line);
+  border-radius: 12px;
+}
+
+.stat dt {
+  margin: 0;
+}
+
+.stat dd {
+  margin: 0.15rem 0 0;
+  font-family: var(--font-mono);
+  font-size: 1.4rem;
+  font-weight: 500;
+  overflow-wrap: anywhere;
+}
+
+.big-result {
+  margin: 0;
+  font-size: clamp(2rem, 8vw, 4rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  overflow-wrap: anywhere;
+}
+
+.chips-out {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.chips-out li {
+  min-width: 2.75rem;
+  padding: 0.35rem 0.7rem;
+  text-align: center;
+  background: var(--bg);
+  border: 2px solid var(--line);
+  border-radius: 10px;
+  font-family: var(--font-mono);
+  font-size: 1.1rem;
+}
+
+.diff {
+  margin: 0;
+  padding: 0.75rem;
+  max-height: 28rem;
+  overflow: auto;
+  background: var(--bg);
+  border: 2px solid var(--line);
+  border-radius: 10px;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  line-height: 1.5;
+  list-style: none;
+}
+
+.diff li {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  padding: 0 0.35rem;
+  border-left: 4px solid transparent;
+}
+
+.diff .add {
+  border-left-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+}
+
+.diff .del {
+  border-left-color: var(--muted);
+  text-decoration: line-through;
+  text-decoration-thickness: 1px;
+  color: var(--muted);
+}
+
+.team {
+  padding: 0.75rem 0.9rem;
+  background: var(--bg);
+  border: 2px solid var(--line);
+  border-radius: 12px;
+}
+
+.team h3 {
+  margin: 0 0 0.35rem;
+  font-size: 1rem;
+}
+
+.team ul {
+  margin: 0;
+  padding-left: 1.1rem;
+}
+
+.teams {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+  gap: 0.75rem;
+}
