@@ -10,7 +10,7 @@ Plain HTML, CSS and JavaScript. No build step, no framework, no tracking.
 |---|---|
 | Image resize & compress (JPEG, PNG, WebP) | `tools/image.html` |
 | PDF merge, reorder, remove and extract pages | `tools/pdf.html` |
-| 25 small tools: text, encoding, security, calculators, converters, fun | `tools/tool.html?id=<tool id>` |
+| 39 small tools: text, encoding, security, calculators, converters, fun, developer, data, colour | `tools/tool.html?id=<tool id>` |
 
 The catalogue lists 66 tools in 15 categories. Tools without a page yet are marked "Soon".
 

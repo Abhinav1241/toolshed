@@ -113,7 +113,10 @@
     'password-generator', 'hash-generator', 'passphrase-maker', 'password-strength',
     'percentage-calculator', 'tip-splitter', 'loan-calculator', 'bmi-calculator',
     'unit-converter', 'temperature-converter', 'number-bases', 'roman-numerals',
-    'dice-roller', 'coin-flip', 'random-picker', 'name-shuffler'
+    'dice-roller', 'coin-flip', 'random-picker', 'name-shuffler',
+    'json-formatter', 'regex-tester', 'cron-explainer', 'jwt-decoder', 'uuid-generator', 'markdown-preview',
+    'csv-to-json', 'json-to-csv', 'yaml-to-json', 'table-sorter',
+    'colour-converter', 'contrast-checker', 'palette-maker', 'gradient-picker'
   ];
 
   function slug(name) {
