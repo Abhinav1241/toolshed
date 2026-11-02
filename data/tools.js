@@ -30,10 +30,10 @@
     ['image', 'Image to Base64', 'Turn a small image into a data URI.', 'base64,encode'],
     ['image', 'Favicon maker', 'Make favicon sizes from one picture.', 'favicon,resize,web'],
 
-    ['pdf', 'PDF merge & split', 'Join several PDFs into one, or cut one into parts.', 'merge,split'],
-    ['pdf', 'Reorder pages', 'Drag pages into a new order.', 'reorder,pages'],
-    ['pdf', 'Extract pages', 'Keep only the pages you pick.', 'extract,pages'],
-    ['pdf', 'Remove pages', 'Delete the pages you do not want.', 'remove,pages'],
+    ['pdf', 'PDF merge & split', 'Join several PDFs into one, or cut one into parts.', 'merge,split', 'tools/pdf.html'],
+    ['pdf', 'Reorder pages', 'Drag pages into a new order.', 'reorder,pages', 'tools/pdf.html'],
+    ['pdf', 'Extract pages', 'Keep only the pages you pick.', 'extract,pages', 'tools/pdf.html'],
+    ['pdf', 'Remove pages', 'Delete the pages you do not want.', 'remove,pages', 'tools/pdf.html'],
     ['pdf', 'Images to PDF', 'Combine pictures into a single PDF.', 'images,convert'],
 
     ['text', 'Word counter', 'Words, characters, sentences and reading time.', 'count,words,reading time'],

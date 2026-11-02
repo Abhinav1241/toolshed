@@ -272,3 +272,138 @@
     flex: 1;
   }
 }
+
+/* PDF page grid */
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0 0 1rem;
+}
+
+.pages {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(9.5rem, 1fr));
+  gap: 0.9rem;
+}
+
+.page-tile {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  background: var(--surface);
+  border: 2px solid var(--line);
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.page-tile::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 4px;
+  background: oklch(var(--tint-l, 0.72) var(--tint-c, 0.09) var(--hue, 30));
+}
+
+.page-tile.is-selected {
+  border-color: var(--accent);
+}
+
+.page-tile.is-dragging {
+  opacity: 0.4;
+}
+
+.page-tile.is-target {
+  border-style: dashed;
+  border-color: var(--accent);
+}
+
+.page-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-top: 0.25rem;
+}
+
+.page-pick {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  cursor: pointer;
+}
+
+.page-pick input {
+  width: 1.1rem;
+  height: 1.1rem;
+  accent-color: var(--accent);
+}
+
+.page-num {
+  font-family: var(--font-mono);
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+.page-sheet {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 3 / 4;
+  background: var(--bg);
+  border: 2px solid var(--line);
+  border-radius: 6px;
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  text-align: center;
+  cursor: grab;
+}
+
+.page-from {
+  margin: 0;
+  font-size: 0.8rem;
+  line-height: 1.3;
+  color: var(--muted);
+  overflow-wrap: anywhere;
+}
+
+.page-btns {
+  display: flex;
+  gap: 0.35rem;
+}
+
+.icon-btn {
+  flex: 1;
+  display: grid;
+  place-items: center;
+  padding: 0.35rem;
+  background: transparent;
+  color: var(--text);
+  border: 2px solid var(--line);
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.icon-btn:hover:not(:disabled) {
+  border-color: var(--accent);
+}
+
+.icon-btn:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.icon-btn svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.75;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
